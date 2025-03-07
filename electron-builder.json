@@ -1,0 +1,17 @@
+{
+    "appId": "com.sb-creations.ThinkFlow",
+    "productName": "ThinkFlow",
+    "copyright": "Copyright © 2025 Aliasger",
+    "files": ["dist-electron", "dist-react"],
+    "icon": "public/icon.png",
+    "mac": {
+        "target": "dmg"
+    },
+    "linux": {
+        "target": ["AppImage"],
+        "category": "Utility"
+    },
+    "win": {
+        "target": ["portable", "msi"]
+    }
+}
