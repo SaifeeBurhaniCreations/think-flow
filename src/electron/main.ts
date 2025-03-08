@@ -1,11 +1,13 @@
-import { app, BrowserWindow, session  } from "electron";
+import { app, BrowserWindow, session, screen } from "electron";
 import path from "path";
 import { isDev } from "./utils.js";
 
 app.on("ready", () => {
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+
     const mainWindow = new BrowserWindow({
-        width: 1280,
-        height: 720,
+        width,
+        height,
         webPreferences: {
             contextIsolation: false,
             nodeIntegration: true,
