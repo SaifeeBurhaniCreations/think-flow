@@ -17,6 +17,7 @@
     "dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/react": "^3.9.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -25,6 +26,7 @@
     "@tailwindcss/vite": "^4.0.12",
     "chart.js": "^4.4.8",
     "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
     "express": "^4.21.2",
     "framer-motion": "^12.4.10",
     "monaco-editor": "^0.52.2",

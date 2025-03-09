@@ -1,6 +1,8 @@
-import { app, BrowserWindow, session, screen } from "electron";
-import path from "path";
-    import { isDev } from "./utils.js";
+import { app, BrowserWindow, session, screen, ipcMain } from "electron";
+import * as path from 'path';
+import { CSVReader } from './csvReader.js';
+import { isDev } from "./utils.js";
+import { getPreloadPath } from "./pathResolver.js";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -11,8 +13,9 @@ app.on("ready", () => {
         width,
         height,
         webPreferences: {
-            contextIsolation: false,
+            contextIsolation: true,
             nodeIntegration: true,
+            preload: getPreloadPath(),
         },
     });
 
@@ -32,6 +35,15 @@ app.on("ready", () => {
     } else {
         mainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
     }
+
+    ipcMain.handle('read-csv', async (_event, filePath: string) => {
+        try {
+            const data = await CSVReader.readCSV(filePath);
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    });
 
     app.on("window-all-closed", () => {
         if (process.platform !== "darwin") {
