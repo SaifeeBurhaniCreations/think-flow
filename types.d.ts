@@ -9,6 +9,7 @@ declare global {
     interface Window {
         electron: {
             readCSV: (filePath: string) => Promise<csvData[]>;
+            openDialogPopup: () => Promise<string>;
         };
     }
 }

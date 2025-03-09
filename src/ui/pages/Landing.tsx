@@ -1,36 +1,33 @@
 import { Heading, HStack, Icon, RadioCard, VStack } from "@chakra-ui/react"
-import { RiFolderFill, RiTerminalBoxFill, RiGitBranchLine } from "react-icons/ri"
-
-
-const items = [
-  { value: "open_project", title: "Open project", icon: <RiFolderFill /> },
-  { value: "clone_repo", title: "Clone repo", icon: <RiGitBranchLine   /> },
-  { value: "connect_via_ssh", title: "Connect via SSH", icon: <RiTerminalBoxFill /> },
-]
+import { landingTabs } from "../../constants/landing_page"
+import { openDialogBox } from "../lib/folderSystem"
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
+  const navigate = useNavigate();
   return (
-    <VStack justifyContent="center" alignItems="center" h="100vh">
-      <Heading>ThinkFlow</Heading>
+    <VStack justifyContent="center" alignItems="center" h="100vh" gap={8}>
+      <Heading fontSize="4xl">ThinkFlow</Heading>
 
       <RadioCard.Root
         orientation="vertical"
         align="center"
-        defaultValue="open_project"
         w="500px"
       >
         <HStack>
-          {items.map((item) => (
-            <RadioCard.Item key={item.value} value={item.value}>
-              <RadioCard.ItemHiddenInput />
-              <RadioCard.ItemControl>
-                <Icon fontSize="2xl" color="fg.muted">
-                  {item.icon}
-                </Icon>
-                <RadioCard.ItemText>{item.title}</RadioCard.ItemText>
-              </RadioCard.ItemControl>
-            </RadioCard.Item>
-          ))}
+          {landingTabs.map((tab) => {
+            const isOpenFolder = tab.value === "open_project";
+            const isSSH = tab.value === "connect_via_ssh";
+            return (
+              <RadioCard.Item key={tab.value} value={tab.value}>
+                <RadioCard.ItemHiddenInput />
+                <RadioCard.ItemControl cursor="pointer" onClick={() => isOpenFolder ? openDialogBox() : isSSH ? navigate("/main") : console.log("not open folder")}>
+                  <Icon as={tab.icon} fontSize="2xl" color="fg.muted" />
+                  <RadioCard.ItemText>{tab.title}</RadioCard.ItemText>
+                </RadioCard.ItemControl>
+              </RadioCard.Item>
+            )
+          })}
         </HStack>
       </RadioCard.Root>
     </VStack>

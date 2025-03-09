@@ -5,8 +5,7 @@ import {
   Table,
   Text,
 } from '@chakra-ui/react';
-import { DatasetRow, sortDataset } from '../../lib/fileSystem';
-import { loadDataset } from '../../lib/fileSystem';
+import { DatasetRow, sortDataset, loadDataset } from '../../lib/DataExplorer';
 
 const DatasetExplorer: React.FC = () => {
   const [data, setData] = useState<DatasetRow[]>([]);

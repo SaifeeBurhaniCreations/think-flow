@@ -3,6 +3,7 @@ import * as path from 'path';
 import { CSVReader } from './csvReader.js';
 import { isDev } from "./utils.js";
 import { getPreloadPath } from "./pathResolver.js";
+import { openDialogPopup } from "./components/dialogWindow.js";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -14,7 +15,7 @@ app.on("ready", () => {
         height,
         webPreferences: {
             contextIsolation: true,
-            nodeIntegration: true,
+            nodeIntegration: false,
             preload: getPreloadPath(),
         },
     });
@@ -44,6 +45,13 @@ app.on("ready", () => {
             throw error;
         }
     });
+
+    ipcMain.handle('open-dialog-popup', async (_event) => {
+        const result = await openDialogPopup();
+        return result;
+    });
+
+
 
     app.on("window-all-closed", () => {
         if (process.platform !== "darwin") {
