@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Tabs } from "@chakra-ui/react";
+import { Tabs } from "@chakra-ui/react";
 import {
   DrawerBackdrop,
   DrawerBody,
@@ -7,7 +7,6 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerRoot,
-  DrawerTrigger,
 } from "../../../components/ui/drawer";
 
 import AIChat from '../features/AIChat';

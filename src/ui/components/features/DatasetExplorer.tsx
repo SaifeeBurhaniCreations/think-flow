@@ -5,24 +5,23 @@ import {
   Table,
   Text,
 } from '@chakra-ui/react';
-import { DatasetRow, sortDataset } from '../../lib/fileSystem';
-
-const dummyData = [
-  { id: 1, name: "Alice", value: 42, category: "Admin" },
-  { id: 2, name: "Bob", value: 35, category: "User" },
-  { id: 3, name: "Charlie", value: 50, category: "Guest" },
-  { id: 4, name: "David", value: 28, category: "User" },
-  { id: 5, name: "Eve", value: 65, category: "Admin" },
-];
+import { DatasetRow, sortDataset, loadDataset } from '../../lib/DataExplorer';
 
 const DatasetExplorer: React.FC = () => {
-  // const { name: projectPath } = useSelector((state: RootState) => state.project);
   const [data, setData] = useState<DatasetRow[]>([]);
   const [sortColumn, setSortColumn] = useState<keyof DatasetRow>('id');
   const [sortAsc, setSortAsc] = useState(true);
 
   useEffect(() => {
-    const sorted = sortDataset(dummyData, sortColumn, sortAsc);
+    const loadData = async () => {
+      const data = await loadDataset("data/sample.csv");
+      setData(data);
+    }
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    const sorted = sortDataset(data, sortColumn, sortAsc);
     setData(sorted);
   }, [sortColumn, sortAsc]);
 
@@ -59,11 +58,11 @@ const DatasetExplorer: React.FC = () => {
                   <Table.ColumnHeader bg={{ base: 'gray.200', _dark: 'gray.600' }} onClick={() => handleSort('name')} cursor="pointer">
                     Name {sortColumn === 'name' && (sortAsc ? '↑' : '↓')}
                   </Table.ColumnHeader>
-                  <Table.ColumnHeader bg={{ base: 'gray.200', _dark: 'gray.600' }} onClick={() => handleSort('value')} cursor="pointer">
-                    Value {sortColumn === 'value' && (sortAsc ? '↑' : '↓')}
+                  <Table.ColumnHeader bg={{ base: 'gray.200', _dark: 'gray.600' }} onClick={() => handleSort('age')} cursor="pointer">
+                  Age {sortColumn === 'age' && (sortAsc ? '↑' : '↓')}
                   </Table.ColumnHeader>
-                  <Table.ColumnHeader bg={{ base: 'gray.200', _dark: 'gray.600' }} onClick={() => handleSort('category')} cursor="pointer">
-                    Category {sortColumn === 'category' && (sortAsc ? '↑' : '↓')}
+                  <Table.ColumnHeader bg={{ base: 'gray.200', _dark: 'gray.600' }} onClick={() => handleSort('email')} cursor="pointer">
+                    Email {sortColumn === 'email' && (sortAsc ? '↑' : '↓')}
                   </Table.ColumnHeader>
                 </Table.Row>
               </Table.Header>
@@ -72,8 +71,8 @@ const DatasetExplorer: React.FC = () => {
                   <Table.Row key={row.id}>
                     <Table.Cell>{row.id}</Table.Cell>
                     <Table.Cell>{row.name}</Table.Cell>
-                    <Table.Cell>{row.value}</Table.Cell>
-                    <Table.Cell>{row.category}</Table.Cell>
+                    <Table.Cell>{row.age}</Table.Cell>
+                    <Table.Cell>{row.email}</Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>

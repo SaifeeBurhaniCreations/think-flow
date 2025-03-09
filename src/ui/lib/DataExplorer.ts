@@ -1,8 +1,12 @@
 export interface DatasetRow {
     id: number;
     name: string;
-    value: number;
-    category: string;
+    age: number;
+    email: string;
+}
+
+export function loadDataset(filePath: string): Promise<DatasetRow[]> {
+    return window.electron.readCSV(filePath);
 }
 
 export function sortDataset(data: DatasetRow[], column: keyof DatasetRow, ascending: boolean): DatasetRow[] {

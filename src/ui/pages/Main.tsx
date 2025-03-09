@@ -6,6 +6,7 @@ import EditorHeader from '../components/layout/EditorHeader';
 import SidePanels from '../components/layout/SidePanels';
 import { RootState } from '../redux/store';
 import { Box, HStack, Spinner } from '@chakra-ui/react';
+import Header from '../components/layout/Header';
 
 const Main: React.FC = () => {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -25,16 +26,19 @@ const Main: React.FC = () => {
   }, [content, theme]);
 
   return (
-    <HStack className={`h-screen ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
-      <FolderTree />
-      <Box w="100%" h="100%">
+    <Box h="100vh" w="100vw">
+      <Header />
+      <HStack className={`h-screen ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
+        <FolderTree />
+        <Box w="90%" h="100%">
         <EditorHeader />
         <Suspense fallback={<Spinner />}>
           <div ref={editorRef} className="h-[calc(100vh-4rem)]" style={{ width: "100%", height: "300px" }} />
         </Suspense>
       </Box>
-      <SidePanels />
-    </HStack>
+        <SidePanels />
+      </HStack>
+    </Box>
   );
 };
 

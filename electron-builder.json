@@ -3,6 +3,7 @@
     "productName": "ThinkFlow",
     "copyright": "Copyright © 2025 Aliasger",
     "files": ["dist-electron", "dist-react", "dist-server/**/*", "data/**/*"],
+    "extraResources": ["dist-electron/preload.cjs"],
     "icon": "public/icon.png",
     "mac": {
         "target": "dmg"
