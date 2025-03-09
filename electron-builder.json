@@ -2,7 +2,7 @@
     "appId": "com.sb-creations.ThinkFlow",
     "productName": "ThinkFlow",
     "copyright": "Copyright © 2025 Aliasger",
-    "files": ["dist-electron", "dist-react"],
+    "files": ["dist-electron", "dist-react", "dist-server/**/*", "data/**/*"],
     "icon": "public/icon.png",
     "mac": {
         "target": "dmg"

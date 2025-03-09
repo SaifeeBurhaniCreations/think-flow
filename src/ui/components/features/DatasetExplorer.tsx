@@ -5,21 +5,26 @@ import {
   Table,
   Text,
 } from '@chakra-ui/react';
-import { loadDataset, DatasetRow, sortDataset } from '../../lib/fileSystem';
+import { DatasetRow, sortDataset } from '../../lib/fileSystem';
+
+const dummyData = [
+  { id: 1, name: "Alice", value: 42, category: "Admin" },
+  { id: 2, name: "Bob", value: 35, category: "User" },
+  { id: 3, name: "Charlie", value: 50, category: "Guest" },
+  { id: 4, name: "David", value: 28, category: "User" },
+  { id: 5, name: "Eve", value: 65, category: "Admin" },
+];
 
 const DatasetExplorer: React.FC = () => {
   // const { name: projectPath } = useSelector((state: RootState) => state.project);
-  const projectPath = 'D:/SBIntelligency/works/thinkflow/myproject';
   const [data, setData] = useState<DatasetRow[]>([]);
   const [sortColumn, setSortColumn] = useState<keyof DatasetRow>('id');
   const [sortAsc, setSortAsc] = useState(true);
 
-  // useEffect(() => {
-  //   loadDataset(projectPath).then((result) => {
-  //     const sorted = sortDataset(result, sortColumn, sortAsc);
-  //     setData(sorted);
-  //   });
-  // }, [projectPath, sortColumn, sortAsc]);
+  useEffect(() => {
+    const sorted = sortDataset(dummyData, sortColumn, sortAsc);
+    setData(sorted);
+  }, [sortColumn, sortAsc]);
 
   const handleSort = (column: keyof DatasetRow) => {
     if (sortColumn === column) {

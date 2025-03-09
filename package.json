@@ -24,6 +24,7 @@
     "@tailwindcss/postcss": "^4.0.12",
     "@tailwindcss/vite": "^4.0.12",
     "chart.js": "^4.4.8",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "framer-motion": "^12.4.10",
     "monaco-editor": "^0.52.2",
@@ -38,6 +39,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
     "@types/papaparse": "^5.3.15",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",

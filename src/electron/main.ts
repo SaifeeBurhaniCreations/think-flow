@@ -1,17 +1,19 @@
 import { app, BrowserWindow, session, screen } from "electron";
 import path from "path";
-import { isDev } from "./utils.js";
+    import { isDev } from "./utils.js";
+
+let mainWindow: BrowserWindow | null = null;
 
 app.on("ready", () => {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width,
         height,
         webPreferences: {
             contextIsolation: false,
             nodeIntegration: true,
-        }
+        },
     });
 
     session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
@@ -27,9 +29,19 @@ app.on("ready", () => {
 
     if (isDev) {
         mainWindow.loadURL(`http://localhost:5123`);
-    } 
-    else {
+    } else {
         mainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
     }
-});
 
+    app.on("window-all-closed", () => {
+        if (process.platform !== "darwin") {
+            app.quit();
+        }
+    });
+
+    app.on("activate", () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+            app.emit("ready");
+        }
+    });
+});
