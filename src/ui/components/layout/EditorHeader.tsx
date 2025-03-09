@@ -1,7 +1,8 @@
+import { Box } from "@chakra-ui/react"
 
 const EditorHeader = () => {
   return (
-    <div>Editor</div>
+   <Box>Hiii</Box>
   )
 }
 

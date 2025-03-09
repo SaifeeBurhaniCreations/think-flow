@@ -1,11 +1,14 @@
 import { RiFile3Line, RiGitBranchLine, RiSearch2Line} from "react-icons/ri"
 import { VscExtensions } from "react-icons/vsc"
-import { GoChevronDown } from "react-icons/go"
-
+import { IoFlaskOutline, IoLogoDocker } from "react-icons/io5"
+import { HiOutlineChevronUp, HiOutlineChevronDown } from "react-icons/hi"
 export const headerIcons = [
-    { icon: RiFile3Line, label: "Files" },
-    { icon: RiSearch2Line, label: "Search" },
-    { icon: RiGitBranchLine, label: "Branches" },
-    { icon: VscExtensions, label: "Extensions" },
-    { icon: GoChevronDown, label: "More" },
+    { id : 0, icon: RiFile3Line, label: "Files" },
+    { id : 1, icon: RiSearch2Line, label: "Search" },
+    { id : 2, icon: RiGitBranchLine, label: "Branches" },
+    { id : 3, icon: VscExtensions, label: "Extensions" },
+    { id : 4, icon: HiOutlineChevronDown, label: "More", iconSecondary: HiOutlineChevronUp, children: [
+        { id : 0, icon: IoLogoDocker, label: "Docker" },
+        { id : 1, icon: IoFlaskOutline, label: "PlaywUpHiOutlineChevronUp" },
+    ] },
 ]
