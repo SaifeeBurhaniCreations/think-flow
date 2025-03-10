@@ -1,8 +1,9 @@
 import { Box } from "@chakra-ui/react"
-
+import { useNavigate } from "react-router-dom";
 const EditorHeader = () => {
+  const navigate = useNavigate();
   return (
-   <Box>Hiii</Box>
+    <Box onClick={() => navigate("/")}>Hiii</Box>
   )
 }
 

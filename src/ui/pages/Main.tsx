@@ -10,6 +10,7 @@ import { Box, HStack, Spinner, VStack } from '@chakra-ui/react';
 const Main: React.FC = () => {
   const editorRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
+
   const { content, mode } = useSelector((state: RootState) => state.editor);
   const { theme } = useSelector((state: RootState) => state.ui);
 
