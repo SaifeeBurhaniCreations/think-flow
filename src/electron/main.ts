@@ -4,6 +4,7 @@ import { CSVReader } from './csvReader.js';
 import { isDev } from "./utils.js";
 import { getPreloadPath } from "./pathResolver.js";
 import { openDialogPopup } from "./components/dialogWindow.js";
+import { createTree } from "./lib/createTree.js";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -47,8 +48,17 @@ app.on("ready", () => {
     });
 
     ipcMain.handle('open-dialog-popup', async (_event) => {
-        const result = await openDialogPopup();
-        return result;
+        try {
+            const folderPath = await openDialogPopup();
+            if (!folderPath) {
+                throw new Error('Folder path is required');
+            }
+
+            const tree = await createTree(folderPath);
+            return tree;
+        } catch (error) {
+            throw error;
+        }
     });
 
 
